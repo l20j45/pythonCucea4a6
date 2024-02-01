@@ -3,3 +3,8 @@ tengo 30 años
 juego ajedrez
 me gusta la musica
 otro text
+texto1
+texto2
+texto3
+texto4
+texto5
