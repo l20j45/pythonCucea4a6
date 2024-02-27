@@ -1,6 +1,16 @@
-def saludos():
+
+nombre = "Rafa" #Contexto global
+def mostrarUsuario(variable1,variable2):#contexto local
+    print(SuperDuperVariable)
     print("Hola mundo")
-    print("Daniel")
-    
-saludos()
-saludos()
+
+def noMostrarUsuario(SuperDuperVariable):#contexto local
+    print(SuperDuperVariable)
+    print("Adios mundo")
+    SuperDuperVariable ="Giovanni"
+    mostrarUsuario(SuperDuperVariable)
+
+
+mostrarUsuario('Solaire')
+noMostrarUsuario(nombre)
+print(nombre)
