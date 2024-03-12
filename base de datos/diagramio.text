@@ -1,0 +1,64 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Usuarios {
+id_usuario integer
+usuario varchar2
+contrasenia varchar2
+correo varchar2
+nombre varchar2
+apellidoPaterno varchar2
+apellidoMaterno varchar2
+puesto varchar2
+telefono varchar2
+}
+
+Table estacion {
+id_estacion integer
+lugarDeEstacion varchar
+dia date
+}
+
+Table Productos {
+id_Productos integer
+nombre varchar2
+categoria varchar2
+descripcion varchar2
+precioUnitario varchar2
+}
+
+Table Clientes {
+id_cliente integer
+nombre varchar2
+apellidoPaterno varchar2
+apellidoMaterno varchar2
+direccion varchar2
+colonia varchar2
+ciudad varchar2
+telefono varchar2
+}
+
+Table notaDeVenta {
+id_notaDeVenta integer
+id_usuario integer
+id_cliente integer
+dia date
+}
+
+
+Table detalledeventa {
+id_detalledeventa integer
+id_nota_de_venta integer
+id_producto integer
+}
+
+
+Ref: "Usuarios"."id_usuario" < "estacion"."id_estacion"
+
+Ref: "Clientes"."id_cliente" < "notaDeVenta"."id_cliente"
+
+Ref: "Usuarios"."id_usuario" < "notaDeVenta"."id_usuario"
+
+Ref: "notaDeVenta"."id_notaDeVenta" < "detalledeventa"."id_nota_de_venta"
+
+Ref: "detalledeventa"."id_producto" < "Productos"."id_Productos"
