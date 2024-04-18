@@ -4,9 +4,10 @@ from utils import connector
 
 def extraeUsuarios():
     # Establecer la conexión
-    cursor= connector.dbConnection()
+    conexion = connector.dbConnection()
+    cursor = conexion.cursor()
     # Ejemplo de consulta
-    cursor.execute("SELECT * FROM usuario WHERE id_usuario")
+    cursor.execute("SELECT * FROM usuario")
     usuarios = []
     # Obtener los resultados
     resultados = cursor.fetchall()
@@ -19,38 +20,20 @@ def extraeUsuarios():
 
 def extraeUsuario(codigo):
     # Establecer la conexión
-    conexion = mysql.connector.connect(
-        host="148.202.39.38",  # Cambia esto al host de tu base de datos MySQL
-        user="test",    # Cambia esto al nombre de usuario de tu base de datos
-        password="test",  # Cambia esto a la contraseña de tu base de datos
-        database="mercadocucea"  # Cambia esto al nombre de tu base de datos
-    )
-    # Realizar operaciones en la base de datos
+    conexion = connector.dbConnection()
     cursor = conexion.cursor()
     # Ejemplo de consulta
     cursor.execute(f"SELECT * FROM usuario WHERE id_usuario = {codigo}")
     usuarios = []
     # Obtener los resultados
-    resultados = cursor.fetchall()
-    # Imprimir los resultados
-    for fila in resultados:
-        usuario1 = usuarioModel.usuario
-        usuario1['id_usuario']=fila[0]
-        usuario1['usuario']=fila[1]
-        usuario1['correo']=fila[3]
-        usuario1['nombre']=fila[4]
-        usuario1['apellidoPaterno']=fila[5]
-        usuario1['apellidoMaterno']=fila[6]
-        usuario1['puesto']=fila[7]
-        usuario1['telefono']=fila[8]
-        usuarios.append(usuario1)
-        del usuario1
+    resultados = cursor.fetchone()
+    usuario = usuarioModel.asignarDatos(resultados)
     # Cerrar el cursor y la conexión
     cursor.close()
     conexion.close()
-    return usuarios
+    return usuario
 
 datosUsuario = extraeUsuarios()
 print(datosUsuario)
-datosUsuario = extraeUsuario(2)
+datosUsuario = extraeUsuario(1)
 print(datosUsuario)
